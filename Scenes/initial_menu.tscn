@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://dp78h7p61nq0a"]
+
+[ext_resource type="Script" uid="uid://cp6jwms3kku4k" path="res://Scripts/initial_menu.gd" id="1_dvsrd"]
+[ext_resource type="Texture2D" uid="uid://dwqlejtuas2gq" path="res://Sprites/Titulo.png" id="2_pex2g"]
+[ext_resource type="Texture2D" uid="uid://cusawii32i5oe" path="res://Sprites/A.png" id="3_07t1r"]
+[ext_resource type="Texture2D" uid="uid://b5w510utxf6ei" path="res://Sprites/Hilo.png" id="3_kilfa"]
+[ext_resource type="Texture2D" uid="uid://iwp6ceb33ui8" path="res://Sprites/Anzuelo.png" id="5_gheeg"]
+
+[sub_resource type="Animation" id="Animation_kilfa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.034906585]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("A:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.08726646]
+}
+
+[sub_resource type="Animation" id="Animation_gheeg"]
+resource_name = "Rotate"
+length = 3.0000000000000004
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.034906585, -0.034906585]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("A:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.5, 2.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.08726646, 0.0, 0.08726646, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a735w"]
+_data = {
+&"RESET": SubResource("Animation_kilfa"),
+&"Rotate": SubResource("Animation_gheeg")
+}
+
+[node name="InitialMenu" type="Control" unique_id=315264222]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_dvsrd")
+
+[node name="Title" type="TextureRect" parent="." unique_id=1671383573]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 24.0
+offset_right = 757.0
+offset_bottom = 357.0
+texture = ExtResource("2_pex2g")
+
+[node name="Sprite" type="Sprite2D" parent="Title" unique_id=1304059264]
+position = Vector2(483, -56)
+rotation = 0.034906585
+texture = ExtResource("3_kilfa")
+offset = Vector2(-19, 182)
+
+[node name="Anim" type="AnimationPlayer" parent="Title/Sprite" unique_id=1496207916]
+libraries/ = SubResource("AnimationLibrary_a735w")
+autoplay = &"Rotate"
+
+[node name="A" type="Sprite2D" parent="Title/Sprite" unique_id=422616358]
+position = Vector2(-9.064481, 282.30804)
+rotation = 0.08726646
+texture = ExtResource("3_07t1r")
+
+[node name="Anzuelo" type="Sprite2D" parent="Title/Sprite" unique_id=416825384]
+position = Vector2(-11.242149, 289.8282)
+texture = ExtResource("5_gheeg")
+
+[node name="Points" type="Label" parent="." unique_id=926888489]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 616.0
+offset_right = 146.0
+offset_bottom = 639.0
+text = "Puntos máximos: "
+
+[node name="Name" type="LineEdit" parent="." unique_id=1522335334]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 368.0
+offset_right = 672.0
+offset_bottom = 399.0
+placeholder_text = "Nombre"
+alignment = 1
+max_length = 10
+
+[node name="Play" type="Button" parent="." unique_id=1152651168]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 416.0
+offset_right = 704.0
+offset_bottom = 447.0
+text = "Jugar"
+
+[node name="Exit" type="Button" parent="." unique_id=1682826287]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 464.0
+offset_right = 704.0
+offset_bottom = 495.0
+text = "Salir"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

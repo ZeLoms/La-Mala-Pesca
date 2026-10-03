@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://dabsy84404ppj"]
+
+[ext_resource type="Script" uid="uid://dfyuiu03jvnvr" path="res://Scripts/gameplay_scene.gd" id="1_epb4y"]
+[ext_resource type="Texture2D" uid="uid://c6nxm67x5h0n2" path="res://Sprites/Boton Malo.png" id="2_m8blu"]
+[ext_resource type="Texture2D" uid="uid://bankajpo0scfk" path="res://Sprites/Marco.png" id="2_qvqb5"]
+[ext_resource type="Texture2D" uid="uid://qr58b37pjmak" path="res://Sprites/Mercado Pago Perfil.png" id="3_qvqb5"]
+[ext_resource type="Texture2D" uid="uid://iqtigbhtcbyv" path="res://Sprites/Boton Bueno.png" id="3_vb6wd"]
+
+[node name="GameplayScene" type="Control" unique_id=504566342]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_epb4y")
+
+[node name="Warning" type="ColorRect" parent="." unique_id=303511101]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(1, 0.110000014, 0.110000014, 0.08235294)
+
+[node name="Gameplay" type="Control" parent="." unique_id=1410932997]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Message" type="Control" parent="Gameplay" unique_id=888694970]
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 80.0
+offset_right = 772.0
+offset_bottom = 424.0
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay/Message" unique_id=81419130]
+layout_mode = 0
+offset_left = -76.0
+offset_top = -64.0
+offset_right = 460.0
+offset_bottom = 390.0
+texture = ExtResource("2_qvqb5")
+
+[node name="Person" type="HBoxContainer" parent="Gameplay/Message" unique_id=1571443965]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 24.0
+offset_right = 388.0
+offset_bottom = 88.0
+
+[node name="Profile" type="TextureRect" parent="Gameplay/Message/Person" unique_id=1944833550]
+layout_mode = 2
+texture = ExtResource("3_qvqb5")
+
+[node name="MD" type="VBoxContainer" parent="Gameplay/Message/Person" unique_id=1221538188]
+layout_mode = 2
+
+[node name="Mail" type="Label" parent="Gameplay/Message/Person/MD" unique_id=1031836086]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "SchoolNet <noreply@colegiumalert.com>"
+
+[node name="Issue" type="Label" parent="Gameplay/Message/Person/MD" unique_id=1934044833]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Acceso desconocido"
+
+[node name="MainText" type="RichTextLabel" parent="Gameplay/Message" unique_id=296778018]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 96.0
+offset_right = 388.0
+offset_bottom = 368.0
+bbcode_enabled = true
+text = "Hola, no te quiero robar los datos.
+Lo que te enseñaron en la escuela es mentira.
+Todo mail es seguro
+[color=#0000EE]https://mail.google.com/mail/u/0/#inbox[/color]"
+scroll_active = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/Message" unique_id=1681042768]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Points" type="Label" parent="Gameplay" unique_id=441614328]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 48.0
+offset_right = 91.0
+offset_bottom = 71.0
+text = "Puntos:"
+
+[node name="Time" type="Label" parent="Gameplay" unique_id=2084254267]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 95.0
+offset_bottom = 47.0
+text = "Tiempo:"
+
+[node name="Bad" type="TextureButton" parent="Gameplay" unique_id=1452217461]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 520.0
+offset_right = 501.0
+offset_bottom = 604.0
+texture_normal = ExtResource("2_m8blu")
+
+[node name="Good" type="TextureButton" parent="Gameplay" unique_id=492717944]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 520.0
+offset_right = 829.0
+offset_bottom = 604.0
+texture_normal = ExtResource("3_vb6wd")
+
+[node name="Timer" type="Timer" parent="." unique_id=1512619801]
+
+[node name="Last10" type="Timer" parent="." unique_id=1482118402]
+
+[node name="Level" type="Node" parent="." unique_id=622995464]
+
+[connection signal="pressed" from="Gameplay/Bad" to="." method="_on_bad_pressed"]
+[connection signal="pressed" from="Gameplay/Good" to="." method="_on_good_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Last10" to="." method="_on_last_10_timeout"]
